@@ -1,0 +1,84 @@
+<html>
+    <style>
+        .b {
+            width: 250px;
+            height: 250px;
+        }
+        .u {
+            width: 100px;
+            padding-top: 6px;
+            padding-bottom: 6px;
+        }
+    </style>
+<body>
+    <button class='u' id='reset' onclick="resetF()">RESET</button>
+    <p id='clickcounter'>Cookies Per Click: 1</p>
+    <button class="b" onclick="incrementCounter()">Cookie</button>
+    <button class="u" id='upgradeone' onclick="upgradeOne()">Clicker: 1, Cost: 10</button>
+    <button class="u" id='upgradetwo' onclick="upgradeTwo()">Grandma: 1, Cost: 200</button>
+    <div id="counter">Cookies: 0</div>
+  <script>
+    let cookies = 0;
+    let perClick = 1;
+    let firstUpgrade = 1;
+    let firstUpgradeCost = 10;
+    let secondUpgrade = 0;
+    let secondUpgradeCost = 200;
+    
+    function updateUI() {
+        updatePERCLICK();
+        updateCookies();
+        document.getElementById('upgradeone').innerText = 'Clicker: ' + firstUpgrade + ', Cost: ' + firstUpgradeCost;
+        document.getElementById('upgradetwo').innerText = 'Grandma: ' + secondUpgrade + ', Cost: ' + secondUpgradeCost;
+    }
+    function resetF() {
+        cookies = 0;
+        perClick = 1;
+        firstUpgrade = 1;
+        firstUpgradeCost = 10;
+        secondUpgrade = 0;
+        secondUpgradeCost = 200;
+        updateUI();
+    }
+    function updateCookies() {
+        document.getElementById('counter').innerText = 'Cookies: ' + cookies;
+    }
+    function incrementCounter() {
+      cookies += perClick;
+      updateCookies();
+    }
+    function updatePERCLICK() {
+        document.getElementById('clickcounter').innerText = 'Cookies Per Click: ' + perClick;
+    }
+    function upgradeOne() {
+        if (cookies >= firstUpgradeCost) {
+        cookies -= firstUpgradeCost;
+        firstUpgradeCost *= 1.1;
+        firstUpgradeCost = Math.round(firstUpgradeCost);
+        firstUpgrade += 1;
+        perClick += 1;
+        document.getElementById('upgradeone').innerText = 'Clicker: ' + firstUpgrade + ', Cost: ' + firstUpgradeCost;
+        updatePERCLICK();
+        updateCookies();
+        } else {
+        }
+    }
+    function upgradeTwo() {
+        if (cookies >= secondUpgradeCost) {
+        cookies -= secondUpgradeCost;
+        secondUpgradeCost *= 1.1;
+        secondUpgradeCost = Math.round(secondUpgradeCost);
+        secondUpgradeCost += 1;
+        secondUpgrade += 1;
+        perClick += 5;
+        document.getElementById('upgradetwo').innerText = 'Grandma: ' + secondUpgrade + ', Cost: ' + secondUpgradeCost;
+        updatePERCLICK();
+        updateCookies();
+        } else {
+        }
+    }
+    updatePERCLICK();
+    updateCookies();
+  </script>
+</body>
+</html>
